@@ -1,0 +1,14 @@
+{
+    "include": [
+      "src/**/*.ts"
+    ],    
+    "compilerOptions": {
+      "noImplicitReturns": true,
+      "noUnusedParameters": true,
+      "noUnusedLocals": true,
+      "outDir": "./dist",
+      "rootDir": "./src"
+    },
+    "lib": ["es2015"]
+}
+  
