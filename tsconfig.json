@@ -4,11 +4,14 @@
     ],    
     "compilerOptions": {
       "noImplicitReturns": true,
+      "target": "ES2022",
+      "module": "ESNext",
+      "moduleResolution": "node",
       "noUnusedParameters": true,
       "noUnusedLocals": true,
       "outDir": "./dist",
       "rootDir": "./src"
     },
-    "lib": ["es2015"]
+    "lib": ["es2022"]
 }
   
