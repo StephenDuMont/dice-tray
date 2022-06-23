@@ -16,6 +16,18 @@
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "port": 9229
+        },
+        {
+            "name": "debug cli",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "nodemon",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+           // "program": "${workspaceFolder}/dist/dice.js",
+            "runtimeArgs": [
+                "./dist/dice.js", "2d10 + 1d4", "+"
+            ]
         }
     ]
 }

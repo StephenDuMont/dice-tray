@@ -1,10 +1,25 @@
 import DiceTray, { die } from "../dist/dice";
 
 describe.each([
-    {roll: "2d10", match: /^\[\d+( \+ \d+){1}\]$/mg},
-    {roll: "2d10+5", match: /^\[\d+( \+ \d+){2}\]$/mg},
-    {roll: "2d20 + 2d4 + 6", match: /^\[\d+( \+ \d+){4}\]$/mg}
-])('$roll ',  ({roll, match}) => {
+    {
+        roll: "2d10", 
+        match: /^roll \[\d+( \+ \d+){1}\]$/mg, 
+        matchAdv: /^advantageRoll \[\d+( \+ \d+){1}\]$/mg,
+        matchDiss: /^disadvantageRoll \[\d+( \+ \d+){1}\]$/mg
+    },
+    {
+        roll: "2d10+5", 
+        match: /^roll \[\d+( \+ \d+){2}\]$/mg, 
+        matchAdv: /^advantageRoll \[\d+( \+ \d+){2}\]$/mg,
+        matchDiss: /^disadvantageRoll \[\d+( \+ \d+){2}\]$/mg
+    },
+    {
+        roll: "2d20 + 2d4 + 6", 
+        match: /^roll \[\d+( \+ \d+){4}\]$/mg, 
+        matchAdv: /^advantageRoll \[(\[\d+, \d+\] \+ ){2}(\d+ \+ ){2}\d+\]$/gm,
+        matchDiss: /^disadvantageRoll \[(\[\d+, \d+\] \+ ){2}(\d+ \+ ){2}\d+\]$/gm 
+    }
+])('$roll ',  ({roll, match, matchAdv, matchDiss}) => {
     it(`count streight`, () => {
         const d = new DiceTray(roll);
         console.log(d.roll());
@@ -13,12 +28,12 @@ describe.each([
     it(`count adv`, () => {
         const d = new DiceTray(roll);
         console.log(d.advantageRoll());
-        expect(d.roll().details).toMatch(match)
+        expect(d.advantageRoll().details).toMatch(matchAdv)
     })
     it(`count dis`, () => {
         const d = new DiceTray(roll);
         console.log(d.disadvantageRoll());
-        expect(d.roll().details).toMatch(match)
+        expect(d.disadvantageRoll().details).toMatch(matchDiss)
     })
 
 
@@ -37,14 +52,14 @@ describe.each([
 ])(`constant: $value`, ({value}) => {
     it(`streight`, () => {
         const d = new die(0, value);
-        expect(d.roll()).toBe(value);
+        expect(d.roll().sum).toBe(value);
     })
     it(`advantaged`, () => {
         const d = new die(0, value);
-        expect(d.advantageRoll()).toBe(value);
+        expect(d.advantageRoll().sum).toBe(value);
     })
     it(`disadvantaged`, () => {
         const d = new die(0, value);
-        expect(d.disadvantageRoll()).toBe(value);
+        expect(d.disadvantageRoll().sum).toBe(value);
     })
 })
