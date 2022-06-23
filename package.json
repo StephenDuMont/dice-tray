@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "rolls dnd dice",
   "main": "dist/dice.js",
+  "types": "dist/dice.d.ts",
+  "files": ["dist/**/*"],
   "scripts": {
     "test": "jest test test",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublish": "tsc"
   },
   "repository": {
     "type": "git",
