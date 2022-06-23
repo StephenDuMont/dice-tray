@@ -2,9 +2,14 @@
   "name": "dice-tray",
   "version": "1.0.0",
   "description": "rolls dnd dice",
+  "main": "dist/dice.js",
   "scripts": {
     "test": "jest test test",
     "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StephenDuMont/dice-tray"
   },
   "keywords": [
     "dnd",
