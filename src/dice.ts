@@ -24,13 +24,25 @@ export default class DiceTray{
             throw "invalid dice expression" + d;
         }
     }
-    public disadvantageRoll() {
+    /**
+     * rolls with disadvantage on all d20's
+     * @returns 
+     */
+    public disadvantageRoll(): result {
         return this.uRoll("disadvantageRoll");
     }
-    public advantageRoll() {
+    /**
+     * * rolls with advantage on all d20's
+     * @returns 
+     */
+    public advantageRoll(): result {
         return this.uRoll("advantageRoll");
     }
-    public roll() {
+    /**
+     * rolls streight
+     * @returns 
+     */
+    public roll(): result {
         return this.uRoll("roll");
     }
     private uRoll(method: string): result {
@@ -40,13 +52,25 @@ export default class DiceTray{
         return r;
     }
 }
-class result {
+export class result {
     constructor (sum: number) {
         this.sum = sum;
         this.details = sum.toString();
     }
-    sum: number;
-    details: string;
+    /**
+     * integer string showing the total
+     */
+    public sum: number;
+    /**
+     * string showing how result was determined
+     */
+    public details: string;
+    /**
+     * static method to combine two results into the same result
+     * @param a 
+     * @param b 
+     * @returns 
+     */
     static combine(a: result, b: result) {
         return {
             sum: a.sum + b.sum,
@@ -54,7 +78,7 @@ class result {
         }
     }
 }
-export class die{
+class die{
     constructor (
         private base: number, 
         private constant = 0
