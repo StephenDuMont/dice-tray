@@ -1,8 +1,13 @@
 export default class DiceTray{
-    private dice: (die)[];
-    constructor(s: string) {
-        this.dice = s.toLowerCase().split("+").map(x => this.term(x)).reduce((x, y) => x.concat(y));
+    private dice: die[];
+    constructor(public diceString: string) {
+        this.dice = diceString.toLowerCase().split("+").map(x => this.term(x)).reduce((x, y) => x.concat(y));
     }
+    /**
+     * to examine an individual term in the dice string
+     * @param d 
+     * @returns 
+     */
     private term(d: string): (die)[] {
         let op = d.split("d");
         if(op.length === 1) {
