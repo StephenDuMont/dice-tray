@@ -78,7 +78,7 @@ export class result {
         }
     }
 }
-class die{
+export class die{
     constructor (
         private base: number, 
         private constant = 0
