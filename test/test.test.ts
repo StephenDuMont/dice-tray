@@ -1,4 +1,4 @@
-import DiceTray, { die } from "../dist/dice";
+import DiceTray, { Die } from "../dist/dice";
 
 describe.each([
     {
@@ -41,7 +41,7 @@ describe.each([
 describe.skip.each([{base:20}])('roll $base', ({base}) => {
 
     it(`roll`, () => {
-        let d = new die(base); 
+        let d = new Die(base); 
         expect(d.roll()).toBeLessThan(base + 1);
     })
 })
@@ -51,15 +51,15 @@ describe.each([
     {value: 10}
 ])(`constant: $value`, ({value}) => {
     it(`streight`, () => {
-        const d = new die(0, value);
+        const d = new Die(0, value);
         expect(d.roll().sum).toBe(value);
     })
     it(`advantaged`, () => {
-        const d = new die(0, value);
+        const d = new Die(0, value);
         expect(d.advantageRoll().sum).toBe(value);
     })
     it(`disadvantaged`, () => {
-        const d = new die(0, value);
+        const d = new Die(0, value);
         expect(d.disadvantageRoll().sum).toBe(value);
     })
 })
