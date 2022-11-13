@@ -1,7 +1,7 @@
 export default class DiceTray{
     private dice: Die[];
     constructor(public diceString: string) {
-        this.dice = diceString.toLowerCase().split("+").map(x => this.term(x)).reduce((x, y) => x.concat(y));
+        this.dice = diceString.toLowerCase().replace(/\s+/g, '').split('+').map(x => this.term(x)).reduce((x, y) => x.concat(y));
     }
     /**
      * to examine an individual term in the dice string
@@ -10,16 +10,16 @@ export default class DiceTray{
      */
     private term(d: string): (Die)[] {
         let op = d.split("d");
-        if(op.length === 1) {
+        if(op.length === 1) { // constant
             return [new Die(0, parseInt(op[0]))];
-        } else if (op.length === 2) {
+        } else if (op.length === 2) { // dice expression
             try {
             return Array(parseInt(op[0])).fill(new Die(parseInt(op[1]))) as Die[];
             } catch (e) {
                 console.error(op);
                 throw "argument error: " + op;
             }
-        } else {
+        } else {// more than one 'd' in a term
             console.error("invalid dice expression" + d);
             throw "invalid dice expression" + d;
         }
@@ -102,19 +102,3 @@ export class Die{
         }: a ;
     }
 }
-/*
-if (process.argv[2]) {
-    const dt = new DiceTray(process.argv[2]);
-    switch(process.argv[3]) {
-        case "+":
-            console.log(dt.advantageRoll());
-            break;
-        case "-":
-            console.log(dt.disadvantageRoll());
-            break;
-        default:
-            console.log(dt.roll());
-            break;
-    }
-}
-*/

@@ -37,14 +37,15 @@ describe.each([
     })
 
 
-})
+});
+
 describe.skip.each([{base:20}])('roll $base', ({base}) => {
 
     it(`roll`, () => {
         let d = new Die(base); 
         expect(d.roll()).toBeLessThan(base + 1);
     })
-})
+});
 describe.each([
     {value: 5},
     {value: 0},
@@ -61,5 +62,16 @@ describe.each([
     it(`disadvantaged`, () => {
         const d = new Die(0, value);
         expect(d.disadvantageRoll().sum).toBe(value);
+    })
+})
+describe(`constant expression test`, () => {
+    it.each([
+        {test: "3 + 3", result: {"details": "roll [3 + 3]", "sum": 6}},
+        {test: "7 + -3", result: {"details": "roll [7 + -3]", "sum": 4}},
+        {test: "7 + - 3", result: {"details": "roll [7 + -3]", "sum": 4}},
+        {test: "5 - 3", result: {"details": "roll [5]", "sum": 5}}
+    ])(`$test = $result`, ({test, result}) => {
+        const d = new DiceTray(test).roll();
+        expect(d).toEqual(result);
     })
 })
