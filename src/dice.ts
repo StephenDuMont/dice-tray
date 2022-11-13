@@ -1,7 +1,7 @@
 export default class DiceTray{
     private dice: Die[];
     constructor(public diceString: string) {
-        this.dice = diceString.toLowerCase().replace(/\s+/g, '').split('+').map(x => this.term(x)).reduce((x, y) => x.concat(y));
+        this.dice = diceString.toLowerCase().replace(/\s+/g, '').split(/\++/g).map(x => this.term(x)).reduce((x, y) => x.concat(y));
     }
     /**
      * to examine an individual term in the dice string

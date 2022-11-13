@@ -69,7 +69,8 @@ describe(`constant expression test`, () => {
         {test: "3 + 3", result: {"details": "roll [3 + 3]", "sum": 6}},
         {test: "7 + -3", result: {"details": "roll [7 + -3]", "sum": 4}},
         {test: "7 + - 3", result: {"details": "roll [7 + -3]", "sum": 4}},
-        {test: "5 - 3", result: {"details": "roll [5]", "sum": 5}}
+        {test: "5 - 3", result: {"details": "roll [5]", "sum": 5}},
+        {test: "3 ++3", result: {"details": "roll [3 + 3]", "sum": 6}},
     ])(`$test = $result`, ({test, result}) => {
         const d = new DiceTray(test).roll();
         expect(d).toEqual(result);
